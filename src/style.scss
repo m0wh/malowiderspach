@@ -1,5 +1,81 @@
 @import "scss/fonts";
 
+$phi: 1.618;
+$bps: 900px, 1400px;
+$theme: #FF4E00, #111, #E4E4E4;
+$spacing: 15px, 30px;
+
+@mixin start-at($n) {  padding-left: calc((100vh / 12) * #{$n} + var(--spacing) * #{$n}) }
+@mixin   end-at($n) { padding-right: calc((100vh / 12) * #{$n} + var(--spacing) * #{$n}) }
+
+:root {
+  --c_accent: #{nth($theme, 1)};
+  --c_text: #{nth($theme, 2)};
+  --c_background: #{nth($theme, 3)};
+  --spacing: #{nth($spacing, 1)};
+
+  @media screen and (min-width: nth($bps, 2)) {
+  --spacing: #{nth($spacing, 2)};
+  }
+}
+
 body {
   margin: 0;
+  font-family: "Manrope", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  color: var(--c_text);
+  background-color: var(--c_background);
+  line-height: 1.15;
+}
+
+header {
+  margin: 5px 15px;
+  position: fixed;
+
+  @media screen and (min-width: nth($bps, 2)) {
+    margin: 10px 30px;
+  }
+
+  .logo {
+    font-size: 11vw;
+    font-weight: 900;
+    text-transform: uppercase;
+    color: var(--c_accent);
+    line-height: 1;
+    margin: 0;
+
+    @media screen and (min-width: nth($bps, 2)) {
+    }
+  }
+}
+
+main {
+  margin: 0 15px;
+
+  @media screen and (min-width: nth($bps, 2)) {
+    margin: 0 30px;
+    @include start-at(3);
+  }
+}
+
+section[id] {
+  margin: 100px 0;
+  
+  &:first-of-type {
+    margin-top: 0;
+  }
+}
+
+#intro {
+  padding-top: 100vh / $phi;
+
+  p {
+    font-size: 30px;
+    margin: 0;
+    font-weight: 500;
+
+    @media screen and (min-width: nth($bps, 2)) {
+      font-size: 120px;
+    }
+  }
 }
