@@ -1,0 +1,19 @@
+{
+  "name": "malowiderspach",
+  "version": "0.1.0",
+  "description": "Personal portfolio",
+  "main": "index.html",
+  "scripts": {
+    "start": "parcel index.html --open",
+    "predeploy": "parcel build index.html --public-url .",
+    "deploy": "gh-pages -d dist"
+  },
+  "repository": "git@github.com:m0wh/malowiderspach.git",
+  "author": "m0wh <malo.dewiderspach@gmail.com>",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "gh-pages": "^2.0.1",
+    "parcel-bundler": "^1.12.3"
+  }
+}
