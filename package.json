@@ -18,6 +18,8 @@
     "sass": "^1.18.0"
   },
   "dependencies": {
-    "graphql-request": "^1.8.2"
+    "graphql-request": "^1.8.2",
+    "gsap": "^2.1.2",
+    "scrollmagic": "^2.0.6"
   }
 }

@@ -92,29 +92,43 @@ section[id] {
   padding: 0;
   list-style: none;
   padding-top: 25vw;
+
+}
+
+.distort {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  z-index: -20;
+
+  &__cover {
+    opacity: 0;
+  }
 }
 
 .project {
   margin-bottom: 200px;
 
-  $e: &;
+  // $e: &;
 
-  &__cover {
-    pointer-events: none;
-    position: fixed;
-    height: 80vh;
-    width: 80vw;
-    object-fit: contain;
-    top: 50vh;
-    left: 50vw;
-    transform: translate3d(-50%, -50%,0);
-    opacity: 0;
-    z-index: 10;
+  // &__cover {
+  //   pointer-events: none;
+  //   position: fixed;
+  //   height: 80vh;
+  //   width: 80vw;
+  //   object-fit: contain;
+  //   top: 50vh;
+  //   left: 50vw;
+  //   transform: translate3d(-50%, -50%,0);
+  //   opacity: 0;
+  //   z-index: 10;
 
-    #{$e}:hover & {
-      opacity: 1;
-    }
-  }
+  //   #{$e}:hover & {
+  //     opacity: 1;
+  //   }
+  // }
 
   &__name {
     font-weight: bold;
@@ -125,13 +139,16 @@ section[id] {
     font-size: 50px;
     color: currentColor;
     text-decoration: none;
+    outline: none;
 
     .arrow {
       display: inline-block;
       transition: .2s ease-out;
     }
 
-    &:hover {
+    &:hover, &:focus {
+      outline: none;
+
       .arrow {
         transform: translate3d(10px, 0, 0);
       }
