@@ -46,7 +46,7 @@
   --c_background: #E4E4E4;
   --spacing: 15px;
 }
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 690px) {
   :root {
     --spacing: 30px;
   }
@@ -59,19 +59,20 @@ body {
   color: var(--c_text);
   background-color: var(--c_background);
   line-height: 1.15;
+  overflow-x: hidden;
 }
 
 header {
-  margin: 5px 15px;
+  margin: 5px var(--spacing);
   position: fixed;
 }
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1000px) {
   header {
     margin: 10px 30px;
   }
 }
 header .logo {
-  font-size: 11vw;
+  font-size: 9vw;
   font-weight: 900;
   text-transform: uppercase;
   color: var(--c_accent);
@@ -79,9 +80,9 @@ header .logo {
   margin: 0;
 }
 main {
-  margin: 0 15px;
+  margin: 0 var(--spacing);
 }
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 1000px) {
   main {
     margin: 0 30px;
     padding-left: calc((100vh / 12) * 3 + var(--spacing) * 3);
@@ -99,13 +100,80 @@ section[id]:first-of-type {
   padding-top: 61.804697157vh;
 }
 #intro p {
-  font-size: 30px;
+  font-size: 50px;
   margin: 0;
   font-weight: 500;
 }
-@media screen and (min-width: 1400px) {
+@media screen and (min-width: 690px) {
+  #intro p {
+    font-size: 100px;
+  }
+}
+@media screen and (min-width: 1000px) {
   #intro p {
     font-size: 120px;
+  }
+}
+
+.projects {
+  padding: 0;
+  list-style: none;
+  padding-top: 25vw;
+}
+.projects .project {
+  margin-bottom: 200px;
+}
+.projects .project__cover {
+  width: 100%;
+  min-height: 500px;
+  max-height: 800px;
+  object-fit: cover;
+  object-position: center center;
+}
+.projects .project__name {
+  font-weight: bold;
+}
+.projects .project__desc {
+  margin: 50px 0 30px 0;
+  font-size: 50px;
+}
+.projects .project__link {
+  text-decoration: none;
+  color: currentColor;
+  margin: 0;
+  line-height: 20px;
+}
+.projects .project__link .arrow {
+  display: inline-block;
+  transition: 0.2s ease-out;
+}
+.projects .project__link:hover .arrow {
+  transform: translate3d(10px, 0, 0);
+}
+
+.rolling-text {
+  position: absolute;
+  opacity: 0.1;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  z-index: -5;
+}
+.rolling-text > p {
+  display: block;
+  font-size: 30vw;
+  white-space: nowrap;
+  margin: 0;
+  text-transform: uppercase;
+  animation: roll 10s infinite linear;
+  font-weight: 900;
+}
+
+@keyframes roll {
+  from {
+    transform: translate3d(25%, 0, 0);
+  }
+  to {
+    transform: translate3d(-25%, 0, 0);
   }
 }
 
