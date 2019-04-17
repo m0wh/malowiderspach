@@ -14535,13 +14535,18 @@ function () {
             });
             _this2.fade = false;
           } else {
-            TweenMax.set(_this2.DOM.imgs[_this2.current], {
+            TweenMax.to(_this2.DOM.imgs[_this2.current], 0.2, {
               opacity: 1
             });
           }
         };
 
         item.addEventListener('mouseenter', mouseenterFn);
+        item.addEventListener('mouseenter', mousemenuenterFn);
+        item.addEventListener('mouseleave', function () {
+          mousemenuleaveFn();
+          console.log("leave");
+        });
       });
 
       var mousemenuenterFn = function mousemenuenterFn() {
@@ -14554,9 +14559,6 @@ function () {
           opacity: 0
         });
       };
-
-      this.DOM.menu.addEventListener('mouseenter', mousemenuenterFn);
-      this.DOM.menu.addEventListener('mouseleave', mousemenuleaveFn);
     }
   }, {
     key: "render",
@@ -15410,10 +15412,11 @@ var coversList = document.querySelector("#work .distort .covers"); // Get projec
 
     new _scrollmagic.Scene({
       triggerElement: li,
-      triggerHook: .8
+      triggerHook: .8,
+      reverse: false
     }).setTween(_gsap.TweenMax.from(li.querySelector(".project__desc"), .5, {
       autoAlpha: 0,
-      y: 50
+      x: -100
     })).addTo(controller);
   });
 }).then(function () {
@@ -15447,7 +15450,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49820" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49888" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

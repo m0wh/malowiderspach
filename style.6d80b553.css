@@ -74,7 +74,7 @@ header {
   }
 }
 header .logo {
-  font-size: 9vw;
+  font-size: 10vw;
   font-weight: 900;
   text-transform: uppercase;
   color: var(--c_accent);
@@ -82,6 +82,17 @@ header .logo {
   margin: 0;
   transition: 0.1s;
 }
+@media screen and (min-width: 690px) {
+  header .logo {
+    font-size: 9vw;
+  }
+}
+@media screen and (min-width: 1000px) {
+  header .logo {
+    font-size: 8vw;
+  }
+}
+
 main {
   margin: 0 var(--spacing);
 }
@@ -137,17 +148,37 @@ section[id]:first-of-type {
 }
 
 .project {
-  margin-bottom: 200px;
+  margin-bottom: 100px;
+}
+@media screen and (min-width: 690px) {
+  .project {
+    margin-bottom: 200px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .project {
+    margin-bottom: 250px;
+  }
 }
 .project__name {
   font-weight: bold;
 }
 .project__desc {
-  margin: 50px 0 30px 0;
-  font-size: 50px;
+  display: block;
+  font-size: 30px;
   color: currentColor;
   text-decoration: none;
   outline: none;
+}
+@media screen and (min-width: 690px) {
+  .project__desc {
+    font-size: 50px;
+  }
+}
+@media screen and (min-width: 1000px) {
+  .project__desc {
+    font-size: 70px;
+  }
 }
 .project__desc .arrow {
   display: inline-block;
