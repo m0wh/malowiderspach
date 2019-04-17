@@ -32,6 +32,8 @@ body {
 header {
   margin: 5px var(--spacing);
   position: fixed;
+  pointer-events: none;
+  z-index: 12;
 
   @media screen and (min-width: nth($bps, 2)) {
     margin: 10px 30px;
@@ -44,6 +46,7 @@ header {
     color: var(--c_accent);
     line-height: 1;
     margin: 0;
+    transition: .1s;
 
     @media screen and (min-width: nth($bps, 2)) {
     }
@@ -89,42 +92,48 @@ section[id] {
   padding: 0;
   list-style: none;
   padding-top: 25vw;
+}
 
-  .project {
-    margin-bottom: 200px;
+.project {
+  margin-bottom: 200px;
 
-    &__cover {
-      width: 100%;
-      min-height: 500px;
-      max-height: 800px;
-      object-fit: cover;
-      object-position: center center;
+  $e: &;
+
+  &__cover {
+    pointer-events: none;
+    position: fixed;
+    height: 80vh;
+    width: 80vw;
+    object-fit: contain;
+    top: 50vh;
+    left: 50vw;
+    transform: translate3d(-50%, -50%,0);
+    opacity: 0;
+    z-index: 10;
+
+    #{$e}:hover & {
+      opacity: 1;
+    }
+  }
+
+  &__name {
+    font-weight: bold;
+  }
+
+  &__desc {
+    margin: 50px 0 30px 0;
+    font-size: 50px;
+    color: currentColor;
+    text-decoration: none;
+
+    .arrow {
+      display: inline-block;
+      transition: .2s ease-out;
     }
 
-    &__name {
-      font-weight: bold;
-    }
-
-    &__desc {
-      margin: 50px 0 30px 0;
-      font-size: 50px;
-    }
-
-    &__link {
-      text-decoration: none;
-      color: currentColor;
-      margin: 0;
-      line-height: 20px;
-
+    &:hover {
       .arrow {
-        display: inline-block;
-        transition: .2s ease-out;
-      }
-
-      &:hover {
-        .arrow {
-          transform: translate3d(10px, 0, 0);
-        }
+        transform: translate3d(10px, 0, 0);
       }
     }
   }
