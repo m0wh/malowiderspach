@@ -25,13 +25,13 @@ const coversList = document.querySelector("#work .distort .covers");
 getProjects().then(projects => projects.forEach(project => {
   const li = document.createElement("li"); // create the list item element
   li.classList.add("project");
-  li.innerHTML = `<a href="${ project.url }" target="_blank" class="project__desc"><span class="project__name">${ project.name } —</span> ${ project.description } <span class="arrow">-></span></a>`; // add it the "project" class
+  li.innerHTML = `<a href="${ project.url }" target="_blank" class="project__desc"><span class="project__name">${ project.name } —</span> ${ project.description } <span class="arrow">-></span></a>`;
   projectsList.appendChild(li); // append it to the list element
   coversList.innerHTML += `<image class="distort__cover" x="0" y="0" xlink:href="${ project.cover }" height="632" width="808" />`;
   
   // ScrollMagic & GSAP
-  new Scene({ triggerElement: li, triggerHook: .8 })
-    .setTween(TweenMax.from(li.querySelector(".project__desc"), .5, { autoAlpha: 0, y: 50 }))
+  new Scene({ triggerElement: li, triggerHook: .8, reverse: false })
+    .setTween(TweenMax.from(li.querySelector(".project__desc"), .5, { autoAlpha: 0, x: -100 }))
     .addTo(controller);
 })).then(() => {
   new Menu("#work .distort", "#work .projects", ".project__desc");

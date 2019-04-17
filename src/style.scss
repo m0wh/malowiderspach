@@ -40,7 +40,7 @@ header {
   }
 
   .logo {
-    font-size: 9vw; 
+    font-size: 10vw;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--c_accent);
@@ -48,7 +48,12 @@ header {
     margin: 0;
     transition: .1s;
 
+    @media screen and (min-width: nth($bps, 1)) {
+      font-size: 9vw;
+    }
+
     @media screen and (min-width: nth($bps, 2)) {
+      font-size: 8vw;
     }
   }
 }
@@ -109,37 +114,34 @@ section[id] {
 }
 
 .project {
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 
-  // $e: &;
+  @media screen and (min-width: nth($bps, 1)) {
+    margin-bottom: 200px;
+  }
 
-  // &__cover {
-  //   pointer-events: none;
-  //   position: fixed;
-  //   height: 80vh;
-  //   width: 80vw;
-  //   object-fit: contain;
-  //   top: 50vh;
-  //   left: 50vw;
-  //   transform: translate3d(-50%, -50%,0);
-  //   opacity: 0;
-  //   z-index: 10;
-
-  //   #{$e}:hover & {
-  //     opacity: 1;
-  //   }
-  // }
+  @media screen and (min-width: nth($bps, 2)) {
+    margin-bottom: 250px;
+  }
 
   &__name {
     font-weight: bold;
   }
 
   &__desc {
-    margin: 50px 0 30px 0;
-    font-size: 50px;
+    display: block;
+    font-size: 30px;
     color: currentColor;
     text-decoration: none;
     outline: none;
+
+    @media screen and (min-width: nth($bps, 1)) {
+      font-size: 50px;
+    }
+
+    @media screen and (min-width: nth($bps, 2)) {
+      font-size: 70px;
+    }
 
     .arrow {
       display: inline-block;

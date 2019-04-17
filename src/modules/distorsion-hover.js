@@ -84,17 +84,17 @@ class Menu {
                     this.fade = false;
                 }
                 else {
-                    TweenMax.set(this.DOM.imgs[this.current], {opacity: 1});
+                    TweenMax.to(this.DOM.imgs[this.current], 0.2, {opacity: 1});
                 }
             };
             item.addEventListener('mouseenter', mouseenterFn);
+            item.addEventListener('mouseenter', mousemenuenterFn);
+            item.addEventListener('mouseleave', () => { mousemenuleaveFn(); console.log("leave") });
         });
 
         const mousemenuenterFn = () => this.fade = true;
         const mousemenuleaveFn = () => TweenMax.to(this.DOM.imgs[this.current], .2, {ease: Quad.easeOut, opacity: 0});
         
-        this.DOM.menu.addEventListener('mouseenter', mousemenuenterFn);
-        this.DOM.menu.addEventListener('mouseleave', mousemenuleaveFn);
     }
     render() {
         // Translate the image on mousemove
