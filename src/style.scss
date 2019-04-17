@@ -1,7 +1,7 @@
 @import "scss/fonts";
 
 $phi: 1.618;
-$bps: 900px, 1400px;
+$bps: 690px, 1400px;
 $theme: #FF4E00, #111, #E4E4E4;
 $spacing: 15px, 30px;
 
@@ -26,6 +26,7 @@ body {
   color: var(--c_text);
   background-color: var(--c_background);
   line-height: 1.15;
+  overflow-x: hidden;
 }
 
 header {
@@ -37,7 +38,7 @@ header {
   }
 
   .logo {
-    font-size: 11vw;
+    font-size: 9vw; 
     font-weight: 900;
     text-transform: uppercase;
     color: var(--c_accent);
@@ -73,9 +74,57 @@ section[id] {
     font-size: 30px;
     margin: 0;
     font-weight: 500;
+    
+    @media screen and (min-width: nth($bps, 1)) {
+      font-size: 100px;
+    }
 
     @media screen and (min-width: nth($bps, 2)) {
       font-size: 120px;
     }
   }
+}
+
+.projects {
+  padding: 0;
+  list-style: none;
+  padding-top: 25vw;
+
+  .project {
+    margin-bottom: 200px;
+
+    &__cover {
+      width: 100%;
+      min-height: 500px;
+      background-color: #222;
+    }
+
+    &__name {
+      margin-top: 50px;
+      font-size: 50px;
+    }
+  }
+}
+
+.rolling-text {
+  position: absolute;
+  opacity: .1;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  z-index: -5;
+
+  > p {
+    display: block;
+    font-size: 30vw;
+    white-space: nowrap;
+    margin: 0;
+    text-transform: uppercase;
+    animation: roll 10s infinite linear;
+    font-weight: 900;
+  }
+}
+
+@keyframes roll {
+  from { transform: translate3d(25%, 0, 0) }
+  to   { transform: translate3d(-25%, 0, 0) }
 }
