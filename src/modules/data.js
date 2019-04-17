@@ -8,6 +8,8 @@ const getProjects = () => {
     getUser(username: "mowh") {
       projects {
         name
+        description
+        url
         covers {
           size
           src
@@ -19,6 +21,8 @@ const getProjects = () => {
   return request(url, query).then(data => data.getUser.projects.map(project => {
     return {
       name: project.name,
+      description: project.description,
+      url: project.url,
       cover: project.covers.filter(({ size }) => size === "original")[0].src
     }
   }));

@@ -16,6 +16,17 @@ setInterval(() => {
 // Get projects from API
 getProjects().then(projects => {
   
-  console.table(projects);
+  const projectsSection = document.querySelector("#work .projects");
+  projects.forEach(project => {
+    const li = document.createElement("li")
+    const html = `
+      <li class="project">
+        <img class="project__cover" src="${ project.cover }" alt="${ project.name }"/>
+        <p class="project__desc"><span class="project__name">${ project.name } —</span> ${ project.description }</p>
+        <a class="project__link" href="${ project.url }" target="_blank">${ project.name } on Behance <span class="arrow">-></span></a>
+      </li>
+    `
+    projectsSection.innerHTML += html;
+  });
 
 });

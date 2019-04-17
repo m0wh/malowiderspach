@@ -96,12 +96,36 @@ section[id] {
     &__cover {
       width: 100%;
       min-height: 500px;
-      background-color: #222;
+      max-height: 800px;
+      object-fit: cover;
+      object-position: center center;
     }
 
     &__name {
-      margin-top: 50px;
+      font-weight: bold;
+    }
+
+    &__desc {
+      margin: 50px 0 30px 0;
       font-size: 50px;
+    }
+
+    &__link {
+      text-decoration: none;
+      color: currentColor;
+      margin: 0;
+      line-height: 20px;
+
+      .arrow {
+        display: inline-block;
+        transition: .2s ease-out;
+      }
+
+      &:hover {
+        .arrow {
+          transform: translate3d(10px, 0, 0);
+        }
+      }
     }
   }
 }
