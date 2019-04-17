@@ -1,3 +1,5 @@
+import { getProjects } from "./modules/data";
+
 import "./style.scss";
 
 const lerp = (start, end, amt) => (1 - amt) * start + amt * end;
@@ -11,3 +13,9 @@ setInterval(() => {
   oldScroll = currentScroll;
 }, 1000/60);
 
+// Get projects from API
+getProjects().then(projects => {
+  
+  console.table(projects);
+
+});
