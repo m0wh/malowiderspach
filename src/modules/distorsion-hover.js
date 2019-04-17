@@ -35,9 +35,6 @@ const calcWinsize = () => winsize = {width: window.innerWidth, height: window.in
 calcWinsize();
 window.addEventListener('resize', calcWinsize);
 
-// The feDisplacementMap element
-const feDisplacementMapEl = document.querySelector('feDisplacementMap');
-
 class Menu {
     constructor(SVGSelector, menuSelector, itemSelector) {
         this.DOM = {
@@ -69,6 +66,12 @@ class Menu {
         // Update mouse position
         window.addEventListener('mousemove', ev => this.mousePos = getMousePos(ev));
 
+        const mousemenuenterFn = () => this.fade = true;
+        const mousemenuleaveFn = () => {
+            console.log("fuck");
+            TweenMax.to(this.DOM.imgs[this.current], .2, {ease: Quad.easeOut, opacity: 0})
+        };
+
         this.DOM.menuLinks.forEach((item, pos) => {
             const mouseenterFn = () => {
                 // Hide the previous menu image.
@@ -89,11 +92,8 @@ class Menu {
             };
             item.addEventListener('mouseenter', mouseenterFn);
             item.addEventListener('mouseenter', mousemenuenterFn);
-            item.addEventListener('mouseleave', () => { mousemenuleaveFn(); console.log("leave") });
+            item.addEventListener('mouseleave', mousemenuleaveFn);
         });
-
-        const mousemenuenterFn = () => this.fade = true;
-        const mousemenuleaveFn = () => TweenMax.to(this.DOM.imgs[this.current], .2, {ease: Quad.easeOut, opacity: 0});
         
     }
     render() {
@@ -106,8 +106,8 @@ class Menu {
         this.lastMousePos.displacement.x = lerp(this.lastMousePos.displacement.x, this.mousePos.x, 0.1);
         this.lastMousePos.displacement.y = lerp(this.lastMousePos.displacement.y, this.mousePos.y, 0.1);
         const mouseDistance = distance(this.lastMousePos.displacement.x, this.mousePos.x, this.lastMousePos.displacement.y, this.mousePos.y);
-        this.dmScale = Math.min(lineEq(50, 0, 140, 0, mouseDistance), 50);   
-        feDisplacementMapEl.scale.baseVal = this.dmScale * 8;
+        this.dmScale = Math.min(lineEq(50, 0, 140, 0, mouseDistance), 50);
+        document.querySelector('feDisplacementMap').scale.baseVal = this.dmScale * 8;
 
         requestAnimationFrame(() => this.render());
     }

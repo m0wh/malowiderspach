@@ -18,8 +18,21 @@ setInterval(() => {
   oldScroll = currentScroll;
 }, 1000/60);
 
+
+
 const projectsList = document.querySelector("#work .projects");
-const coversList = document.querySelector("#work .distort .covers");
+const svg = document.querySelector("#work .distort");
+svg.innerHTML = `
+  <filter id="distortionFilter">
+    <feTurbulence type="fractalNoise" baseFrequency="0.0005 0.0005" numOctaves="3" seed="2" stitchTiles="stitch" x="0%" y="0%" width="100%" height="100%" result="noise"/>
+    <feDisplacementMap in="SourceGraphic" in2="noise" scale="0" xChannelSelector="R" yChannelSelector="B" x="0%" y="0%" width="100%" height="100%" filterUnits="userSpaceOnUse"/>
+  </filter>
+
+  <g class="covers" filter="url(#distortionFilter)"></g>
+`;
+const coversList = svg.querySelector(".covers");
+
+
 
 // Get projects from API
 getProjects().then(projects => projects.forEach(project => {
