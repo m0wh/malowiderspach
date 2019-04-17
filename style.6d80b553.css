@@ -65,6 +65,8 @@ body {
 header {
   margin: 5px var(--spacing);
   position: fixed;
+  pointer-events: none;
+  z-index: 12;
 }
 @media screen and (min-width: 1000px) {
   header {
@@ -78,6 +80,7 @@ header .logo {
   color: var(--c_accent);
   line-height: 1;
   margin: 0;
+  transition: 0.1s;
 }
 main {
   margin: 0 var(--spacing);
@@ -120,34 +123,40 @@ section[id]:first-of-type {
   list-style: none;
   padding-top: 25vw;
 }
-.projects .project {
+
+.distort {
+  position: absolute;
+  pointer-events: none;
+  top: 0;
+  left: 0;
+  will-change: transform;
+  z-index: -20;
+}
+.distort__cover {
+  opacity: 0;
+}
+
+.project {
   margin-bottom: 200px;
 }
-.projects .project__cover {
-  width: 100%;
-  min-height: 500px;
-  max-height: 800px;
-  object-fit: cover;
-  object-position: center center;
-}
-.projects .project__name {
+.project__name {
   font-weight: bold;
 }
-.projects .project__desc {
+.project__desc {
   margin: 50px 0 30px 0;
   font-size: 50px;
-}
-.projects .project__link {
-  text-decoration: none;
   color: currentColor;
-  margin: 0;
-  line-height: 20px;
+  text-decoration: none;
+  outline: none;
 }
-.projects .project__link .arrow {
+.project__desc .arrow {
   display: inline-block;
   transition: 0.2s ease-out;
 }
-.projects .project__link:hover .arrow {
+.project__desc:hover, .project__desc:focus {
+  outline: none;
+}
+.project__desc:hover .arrow, .project__desc:focus .arrow {
   transform: translate3d(10px, 0, 0);
 }
 
