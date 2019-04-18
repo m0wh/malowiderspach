@@ -14411,7 +14411,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// From https://tympanus.net/codrops/2019/03/12/image-distortion-effects-with-svg-filters/
+// A base from https://tympanus.net/codrops/2019/03/12/image-distortion-effects-with-svg-filters/
 var lineEq = function lineEq(y2, y1, x2, x1, currentVal) {
   // y = mx + b 
   var m = (y2 - y1) / (x2 - x1),
@@ -14459,9 +14459,7 @@ var calcWinsize = function calcWinsize() {
 };
 
 calcWinsize();
-window.addEventListener('resize', calcWinsize); // The feDisplacementMap element
-
-var feDisplacementMapEl = document.querySelector('feDisplacementMap');
+window.addEventListener('resize', calcWinsize);
 
 var Menu =
 /*#__PURE__*/
@@ -14516,6 +14514,18 @@ function () {
       window.addEventListener('mousemove', function (ev) {
         return _this2.mousePos = getMousePos(ev);
       });
+
+      var mousemenuenterFn = function mousemenuenterFn() {
+        return _this2.fade = true;
+      };
+
+      var mousemenuleaveFn = function mousemenuleaveFn() {
+        TweenMax.to(_this2.DOM.imgs[_this2.current], .2, {
+          ease: Quad.easeOut,
+          opacity: 0
+        });
+      };
+
       this.DOM.menuLinks.forEach(function (item, pos) {
         var mouseenterFn = function mouseenterFn() {
           // Hide the previous menu image.
@@ -14543,22 +14553,8 @@ function () {
 
         item.addEventListener('mouseenter', mouseenterFn);
         item.addEventListener('mouseenter', mousemenuenterFn);
-        item.addEventListener('mouseleave', function () {
-          mousemenuleaveFn();
-          console.log("leave");
-        });
+        item.addEventListener('mouseleave', mousemenuleaveFn);
       });
-
-      var mousemenuenterFn = function mousemenuenterFn() {
-        return _this2.fade = true;
-      };
-
-      var mousemenuleaveFn = function mousemenuleaveFn() {
-        return TweenMax.to(_this2.DOM.imgs[_this2.current], .2, {
-          ease: Quad.easeOut,
-          opacity: 0
-        });
-      };
     }
   }, {
     key: "render",
@@ -14574,7 +14570,7 @@ function () {
       this.lastMousePos.displacement.y = lerp(this.lastMousePos.displacement.y, this.mousePos.y, 0.1);
       var mouseDistance = distance(this.lastMousePos.displacement.x, this.mousePos.x, this.lastMousePos.displacement.y, this.mousePos.y);
       this.dmScale = Math.min(lineEq(50, 0, 140, 0, mouseDistance), 50);
-      feDisplacementMapEl.scale.baseVal = this.dmScale * 8;
+      document.querySelector('feDisplacementMap').scale.baseVal = this.dmScale * 8;
       requestAnimationFrame(function () {
         return _this3.render();
       });
@@ -15398,7 +15394,9 @@ setInterval(function () {
   oldScroll = currentScroll;
 }, 1000 / 60);
 var projectsList = document.querySelector("#work .projects");
-var coversList = document.querySelector("#work .distort .covers"); // Get projects from API
+var svg = document.querySelector("#work .distort");
+svg.innerHTML = "\n  <filter id=\"distortionFilter\">\n    <feTurbulence type=\"fractalNoise\" baseFrequency=\"0.0005 0.0005\" numOctaves=\"3\" seed=\"2\" stitchTiles=\"noStitch\" x=\"0%\" y=\"0%\" width=\"100%\" height=\"100%\" result=\"noise\"/>\n    <feDisplacementMap in=\"SourceGraphic\" in2=\"noise\" scale=\"0\" xChannelSelector=\"R\" yChannelSelector=\"B\" x=\"0%\" y=\"0%\" width=\"100%\" height=\"100%\" filterUnits=\"userSpaceOnUse\"/>\n  </filter>\n\n  <g class=\"covers\" filter=\"url(#distortionFilter)\"></g>\n";
+var coversList = svg.querySelector(".covers"); // Get projects from API
 
 (0, _data.getProjects)().then(function (projects) {
   return projects.forEach(function (project) {
@@ -15421,6 +15419,30 @@ var coversList = document.querySelector("#work .distort .covers"); // Get projec
   });
 }).then(function () {
   new _distorsionHover.Menu("#work .distort", "#work .projects", ".project__desc");
+});
+var themeBtn = document.querySelector("button.darkmode"); // themeBtn.addEventListener("mouseover", () => {});
+
+var themeIsDark = false;
+var themes = {
+  light: {
+    btnText: "Burned eyes?",
+    text: getComputedStyle(document.documentElement).getPropertyValue("--c_text"),
+    background: getComputedStyle(document.documentElement).getPropertyValue("--c_background"),
+    accent: getComputedStyle(document.documentElement).getPropertyValue("--c_accent")
+  },
+  dark: {
+    btnText: "Looks dark?",
+    text: getComputedStyle(document.documentElement).getPropertyValue("--c_text--dark"),
+    background: getComputedStyle(document.documentElement).getPropertyValue("--c_background--dark"),
+    accent: getComputedStyle(document.documentElement).getPropertyValue("--c_accent--dark")
+  }
+};
+themeBtn.addEventListener("click", function () {
+  themeBtn.innerHTML = themeIsDark ? themes.light.btnText : themes.dark.btnText;
+  document.documentElement.style.setProperty("--c_text", themeIsDark ? themes.light.text : themes.dark.text);
+  document.documentElement.style.setProperty("--c_background", themeIsDark ? themes.light.background : themes.dark.background);
+  document.documentElement.style.setProperty("--c_accent", themeIsDark ? themes.light.accent : themes.dark.accent);
+  themeIsDark = !themeIsDark;
 });
 },{"scrollmagic":"node_modules/scrollmagic/scrollmagic/uncompressed/ScrollMagic.js","scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap":"node_modules/scrollmagic/scrollmagic/uncompressed/plugins/animation.gsap.js","gsap":"node_modules/gsap/index.js","./modules/distorsion-hover":"src/modules/distorsion-hover.js","./modules/data":"src/modules/data.js","./style.scss":"src/style.scss"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
@@ -15450,7 +15472,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49888" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49928" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

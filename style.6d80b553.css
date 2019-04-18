@@ -44,6 +44,9 @@
   --c_accent: #FF4E00;
   --c_text: #111;
   --c_background: #E4E4E4;
+  --c_accent--dark: #f00;
+  --c_text--dark: #fff;
+  --c_background--dark: #222;
   --spacing: 15px;
 }
 @media screen and (min-width: 690px) {
@@ -63,14 +66,19 @@ body {
 }
 
 header {
-  margin: 5px var(--spacing);
+  box-sizing: border-box;
+  padding: 5px var(--spacing);
   position: fixed;
-  pointer-events: none;
   z-index: 12;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  pointer-events: none;
 }
 @media screen and (min-width: 1000px) {
   header {
-    margin: 10px 30px;
+    padding: 10px 30px;
   }
 }
 header .logo {
@@ -91,6 +99,39 @@ header .logo {
   header .logo {
     font-size: 8vw;
   }
+}
+header .darkmode {
+  pointer-events: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: "Manrope", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  color: var(--c_text);
+  width: 100px;
+  text-align: left;
+  line-height: 1;
+  font-size: 20px;
+  position: relative;
+  display: block;
+  padding: 10px;
+}
+header .darkmode::after {
+  content: "";
+  background-color: var(--c_text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  transition: 0.2s;
+  z-index: -2;
+}
+header .darkmode:hover {
+  color: var(--c_background);
+}
+header .darkmode:hover::after {
+  width: 100%;
 }
 
 main {
